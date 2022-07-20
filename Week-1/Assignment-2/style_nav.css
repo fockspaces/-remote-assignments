@@ -1,0 +1,48 @@
+body {
+  margin: 0px;
+}
+
+nav > ul {
+  background-color: rgb(230, 230, 230);
+  list-style: none; /* 移除項目符號 */
+  margin: 0;
+  padding: 0;
+}
+
+nav {
+  font-size: 1rem;
+  margin: 0;
+  padding: 0;
+}
+
+nav #icon {
+  width: 50px;
+  border: 1px solid #ddd;
+}
+
+
+nav a {
+  color: inherit; /* 移除超連結顏色 */
+  display: block; /* 讓 <a> 填滿 <li> */
+  font-size: 1.2rem;
+  padding: 10px;
+  text-decoration: none; /* 移除超連結底線 */
+}
+
+nav .menu {
+  display: flex;
+  margin-left: auto;
+}
+
+/* 滑鼠移到 <a> 時變成深底淺色 */
+nav li:hover {
+  background-color: rgb(115, 115, 115);
+  color: white;
+}
+
+.flex-nav {
+  display: flex;
+  justify-content: left;
+}
+
+
