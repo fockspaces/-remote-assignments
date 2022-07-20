@@ -1,0 +1,41 @@
+.header {
+  text-align: center;
+}
+
+.header h1,
+h2 {
+  padding: 0;
+  margin: 0 auto;
+}
+
+.header h1 {
+  font-size: 5rem;
+  background-color: rgb(207, 220, 236);
+}
+.header h2 {
+  font-size: 1.5rem;
+  padding: 15px;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: auto;
+  height: 200px;
+  justify-content: space-evenly;
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-column-gap: 20px;
+  grid-row-gap: 20px;
+}
+
+.container .box {
+  background-color: rgb(139, 152, 168);
+  width: 350px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40px;
+  font-family: sans-serif;
+}

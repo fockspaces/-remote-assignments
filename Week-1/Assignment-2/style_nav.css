@@ -1,16 +1,19 @@
+
+html,
 body {
+  height: 100%;
+  width: 100%;
   margin: 0px;
+  font-family: sans-serif;
 }
-
+@media (min-width: 1200px) {
+  body {
+    width: 1200px;
+  }
+}
 nav > ul {
-  background-color: rgb(230, 230, 230);
+  background-color: rgb(238, 238, 238);
   list-style: none; /* 移除項目符號 */
-  margin: 0;
-  padding: 0;
-}
-
-nav {
-  font-size: 1rem;
   margin: 0;
   padding: 0;
 }
@@ -19,7 +22,6 @@ nav #icon {
   width: 50px;
   border: 1px solid #ddd;
 }
-
 
 nav a {
   color: inherit; /* 移除超連結顏色 */
@@ -44,5 +46,3 @@ nav li:hover {
   display: flex;
   justify-content: left;
 }
-
-
