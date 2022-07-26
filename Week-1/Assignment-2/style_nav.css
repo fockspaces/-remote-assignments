@@ -4,18 +4,17 @@ body {
   width: 100%;
   margin: 0px;
   font-family: sans-serif;
-  border: solid black 3px;
 }
 @media (min-width: 1200px) {
-  body {
+  .container {
     width: 1200px;
   }
 }
 nav > ul {
   background-color: rgb(238, 238, 238);
   list-style: none; /* 移除項目符號 */
-  margin: 0;
-  padding: 0;
+  margin:0;
+  padding: 0 10px 0 0;
 }
 
 nav #icon {
