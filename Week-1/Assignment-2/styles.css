@@ -17,11 +17,10 @@ ul {
 }
 
 /* nav-bar */
-.main-header {
+.nav-bar {
   background-color: #eeeeee;
 }
-.main-nav a,
-.main-header .title {
+.nav-item, .nav-title{
   color: black;
   text-decoration: none;
   text-align: center;

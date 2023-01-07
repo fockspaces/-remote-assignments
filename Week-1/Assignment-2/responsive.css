@@ -1,16 +1,14 @@
 @media (min-width: 500px) {
-  .main-header,
-  .main-nav,
-  .row {
+  .nav-bar,
+  .nav-items {
     display: flex;
-  }
-  .main-header,
-  .row {
-    flex-direction: column;
-    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
   }
 }
 
+
+/* 
 @media (min-width: 1200px) {
   .main-header,
   .row {
@@ -22,5 +20,4 @@
     width: 1200px;
     align-self: center;
   }
-
-}
+} */
