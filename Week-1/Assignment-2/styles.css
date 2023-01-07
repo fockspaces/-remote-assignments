@@ -20,7 +20,8 @@ ul {
 .nav-bar {
   background-color: #eeeeee;
 }
-.nav-item, .nav-title{
+.nav-item,
+.nav-title {
   color: black;
   text-decoration: none;
   text-align: center;
@@ -29,6 +30,15 @@ ul {
 }
 
 /* welcome message */
+.welcome {
+  background-color: #cfdcec;
+  height: 150px;
+  justify-content: center;
+}
+
+.welcome .title {
+  font-size: 30px;
+}
 
 .second-header {
   display: flex;
