@@ -1,19 +1,26 @@
 @media (min-width: 500px) {
-    .main-header,
-    .main-nav {
-      display: flex;
-    }
-    .main-header {
-      flex-direction: column;
-      align-items: center;
-    }
+  .main-header,
+  .main-nav,
+  .row {
+    display: flex;
   }
-  
-  @media (min-width: 1025px) {
-    .main-header {
-      flex-direction: row;
-      justify-content: space-between;
-    }
-    
+  .main-header,
+  .row {
+    flex-direction: column;
+    align-items: center;
   }
-  
+}
+
+@media (min-width: 1200px) {
+  .main-header,
+  .row {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .row {
+    width: 1200px;
+    align-self: center;
+  }
+
+}

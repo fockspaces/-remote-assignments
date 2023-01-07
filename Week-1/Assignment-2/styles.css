@@ -36,7 +36,7 @@ ul {
   flex-direction: column;
   align-items: center;
   background-color: #cfdcec;
-  height: 200px;
+  height: 150px;
   justify-content: center;
 }
 
@@ -44,4 +44,52 @@ ul {
   font-size: 30px;
   margin: 30px auto;
   text-align: center;
+}
+
+/* content-box */
+.title {
+  font-size: 20px;
+  font-weight: bold;
+  padding: 1em 0 1em;
+  text-align: center;
+}
+
+.content-boxes {
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.content-box {
+  color: red;
+  text-align: center;
+  display: block;
+  padding: 1em 2em 1em;
+  flex: 1 50%;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  text-align: center;
+}
+
+.col {
+  margin: 6px;
+  padding: 1em 4em;
+  height: 80px;
+  background-color: #8b98a8;
+  flex: 1 35%;
+  flex-direction: column;
+  color: white;
+}
+
+.button {
+  margin: 20px;
+  align-self: center;
+  background-color: #e0edfd;
+  border-color: #e0edfd;
+  padding: 10px 20px;
 }
