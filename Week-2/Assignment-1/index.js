@@ -1,12 +1,13 @@
 function max(numbers) {
-    let ans = numbers[0];
-    for(let i = 1; i < numbers.length; i++) ans = ans < numbers[i] ? numbers[i] : ans;
-    return ans;
+  let ans = numbers[0];
+  for (let i = 1; i < numbers.length; i++)
+    ans = ans < numbers[i] ? numbers[i] : ans;
+  return ans;
 }
 
 function findPosition(numbers, target) {
-    for(let i = 0; i < numbers.length; i++) if(numbers[i] === target) return i;
-    return -1;
+  for (let i = 0; i < numbers.length; i++) if (numbers[i] === target) return i;
+  return -1;
 }
 
 console.log(max([1, 2, 4, 5])); // should print 5

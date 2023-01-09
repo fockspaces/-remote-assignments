@@ -30,6 +30,11 @@ ul {
   padding: 1em 2em 1em;
 }
 
+.hidden {
+  visibility: hidden;
+  opacity: 0;
+}
+
 /* welcome message */
 .welcome {
   background-color: #cfdcec;
