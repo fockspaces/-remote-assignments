@@ -2,7 +2,7 @@
   "name": "appworks",
   "version": "1.0.0",
   "description": "",
-  "main": "./Week-1/Assignment-2/index.js",
+  "main": "index.js",
   "scripts": {
     "deploy": "gh-pages -d ./"
   },
