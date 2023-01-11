@@ -10,6 +10,7 @@ const changeText = (e) => {
 const showContent = (e) => {
   e.preventDefault();
   contents.forEach((content) => content.classList.remove("hidden"));
+  // contents.forEach((content) => content.style.display = 'none');
 };
 
 welcome.addEventListener("click", changeText);
