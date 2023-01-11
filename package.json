@@ -8,15 +8,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/fockspaces/-remote-assignments.git"
+    "url": "git+https://github.com/fockspaces/remote-assignments.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/fockspaces/-remote-assignments/issues"
+    "url": "https://github.com/fockspaces/remote-assignments/issues"
   },
-  "homepage": "https://github.com/fockspaces/-remote-assignments",
+  "homepage": "https://github.com/fockspaces/remote-assignments.git",
   "dependencies": {
     "gh-pages": "^4.0.0"
   }
