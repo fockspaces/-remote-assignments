@@ -1,6 +1,6 @@
 const welcome = document.querySelector(".welcome");
 const btn = document.querySelector(".button");
-const contents = document.querySelectorAll(".folded");
+const foldedContent = document.querySelectorAll(".folded");
 
 const changeText = (e) => {
   e.preventDefault();
@@ -9,9 +9,10 @@ const changeText = (e) => {
 
 const showContent = (e) => {
   e.preventDefault();
-  contents.forEach((content) => content.classList.remove("hidden"));
-  // contents.forEach((content) => content.style.display = 'none');
+  foldedContent.forEach((content) => content.style.display = "flex");
 };
+
+foldedContent.forEach((content) => (content.style.display = "none"));
 
 welcome.addEventListener("click", changeText);
 btn.addEventListener("click", showContent);
