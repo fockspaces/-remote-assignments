@@ -1,24 +1,29 @@
-const exrpess = require("express");
-const app = exrpess();
+const express = require("express");
+const XMLHttpRequest = require("xhr2");
+
+const app = express();
 const port = 3000;
+app.use(express.static("public"));
 
 app.get("/", (req, res) => {
   res.send("<h1>Hello, My Server!</h1>");
 });
 
 app.get("/data", (req, res) => {
-  res.send("<h1>Lack of Parameter</h1>");
-});
+  if (Object.keys(req.query).length) {
+    const num = parseInt(req.query.number);
 
-app.get("/data/:number", (req, res) => {
-  const num = parseInt(req.params.number);
+    // if integer => sum of 1 + 2 + ... + n else error message
+    const renderedText = Number.isInteger(num)
+      ? `<h3>The sum of the number from (1 to ${num}) is : ${
+          (num * (num + 1)) / 2
+        }</h3>`
+      : "<h3>Wrong Parameter (not an integer)</h3>";
 
-  // if integer => sum of 1 + 2 + ... + n else error message
-  const renderedText = Number.isInteger(num)
-    ? `<h2>The sum of the number from (1 to ${num}) is : ${(num * (num + 1)) / 2}</h2>`
-    : "<h2>Wrong Parameter (not an integer)</h2>";
-
-  res.send(renderedText);
+    res.send(renderedText);
+  } else {
+    res.send("<h3>Lack of Parameter</h3>");
+  }
 });
 
 app.listen(port, () => {
