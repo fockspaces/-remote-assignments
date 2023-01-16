@@ -11,7 +11,8 @@ app.get("/", (req, res) => {
 
 app.get("/data", (req, res) => {
   if (Object.keys(req.query).length) {
-    const num = parseInt(req.query.number);
+    const num = +req.query.number;
+    console.log(num);
 
     // if integer => sum of 1 + 2 + ... + n else error message
     const renderedText = Number.isInteger(num)
