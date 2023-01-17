@@ -3,7 +3,11 @@ const cookieParser = require("cookie-parser");
 
 const app = express();
 const port = 3000;
-app.use(express.static("public"));
+app.use(express.static(__dirname + "/public"));
+app.use(cookieParser());
+
+app.use(express.json()); // to support JSON-encoded bodies
+app.use(express.urlencoded()); // to support URL-encoded bodies
 
 app.get("/", (req, res) => {
   res.send("<h1>Hello, My Server!</h1>");
@@ -29,8 +33,22 @@ app.get("/data", (req, res) => {
 
 app.get("/:myName", (req, res) => {
   const { myName } = req.params;
+  if (Object.values(req.cookies).includes(myName)) {
+    res.send(`<h3>${myName}</h3>`);
+  } else {
+    return res.redirect("signup.html");
+  }
+});
 
-  res.redirect("/signup.html");
+app.post("/trackName", (req, res) => {
+  const { myName } = req.body;
+
+  if (myName == "") {
+    return res.redirect("signup.html");
+  } else {
+    res.cookie(`${myName}`, myName);
+    return res.redirect(`/${myName}`);
+  }
 });
 
 app.listen(port, () => {
