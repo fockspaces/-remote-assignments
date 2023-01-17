@@ -9,8 +9,10 @@ app.use(cookieParser());
 app.use(express.json()); // to support JSON-encoded bodies
 app.use(express.urlencoded()); // to support URL-encoded bodies
 
+app.set("view engine", "pug");
+
 app.get("/", (req, res) => {
-  res.send("<h1>Hello, My Server!</h1>");
+  res.render("homepage");
 });
 
 app.get("/data", (req, res) => {
@@ -34,7 +36,7 @@ app.get("/data", (req, res) => {
 app.get("/:myName", (req, res) => {
   const { myName } = req.params;
   if (Object.values(req.cookies).includes(myName)) {
-    res.send(`<h3>${myName}</h3>`);
+    res.render("homepage", { name: myName });
   } else {
     return res.redirect("signup.html");
   }
