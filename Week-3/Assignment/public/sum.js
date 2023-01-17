@@ -26,6 +26,6 @@ const inputText = document.getElementById("inputText");
 
 inputForm.addEventListener("submit", (e) => {
   e.preventDefault();
-  setTextAxios(inputText.value);
-  // setTextHTTP(inputText.value);
+  // setTextAxios(inputText.value);
+  setTextHTTP(inputText.value);
 });

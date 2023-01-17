@@ -1,5 +1,5 @@
 const express = require("express");
-const XMLHttpRequest = require("xhr2");
+const cookieParser = require("cookie-parser");
 
 const app = express();
 const port = 3000;
@@ -25,6 +25,12 @@ app.get("/data", (req, res) => {
   } else {
     res.send("<h3>Lack of Parameter</h3>");
   }
+});
+
+app.get("/:myName", (req, res) => {
+  const { myName } = req.params;
+
+  res.redirect("/signup.html");
 });
 
 app.listen(port, () => {
