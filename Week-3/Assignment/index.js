@@ -3,9 +3,9 @@ const cookieParser = require("cookie-parser");
 
 const app = express();
 const port = 3000;
+
 app.use(express.static(__dirname + "/public"));
 app.use(cookieParser());
-
 app.use(express.json()); // to support JSON-encoded bodies
 app.use(express.urlencoded()); // to support URL-encoded bodies
 
