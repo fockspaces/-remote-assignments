@@ -7,35 +7,38 @@ const port = 3000;
 app.use(express.static(__dirname + "/public"));
 app.use(cookieParser());
 app.use(express.json()); // to support JSON-encoded bodies
-app.use(express.urlencoded()); // to support URL-encoded bodies
+app.use(express.urlencoded({ extended: true })); // to support URL-encoded bodies
 
 app.set("view engine", "pug");
 
 app.get("/", (req, res) => {
-  res.render("homepage");
+  return res.render("homepage");
 });
 
 app.get("/data", (req, res) => {
+  if (!req.query.number) return res.render("error", { errorCODE: 1 });
   if (Object.keys(req.query).length) {
     const num = +req.query.number;
-    console.log(num);
 
     // if integer => sum of 1 + 2 + ... + n else error message
-    const renderedText = Number.isInteger(num)
-      ? `<h3>The sum of the number from (1 to ${num}) is : ${
-          (num * (num + 1)) / 2
-        }</h3>`
-      : "<h3>Wrong Parameter (not an integer)</h3>";
+    const renderedText = `<h3>The sum of the number from (1 to ${num}) is : ${
+      (num * (num + 1)) / 2
+    }</h3>`;
 
-    res.send(renderedText);
+    if (Number.isInteger(num)) {
+      res.send(renderedText);
+    } else {
+      return res.render("error", { errorCODE: 2 });
+    }
   } else {
-    res.send("<h3>Lack of Parameter</h3>");
+    return res.render("error", { errorCODE: 1 });
   }
 });
 
 app.get("/:myName", (req, res) => {
   const { myName } = req.params;
   if (Object.values(req.cookies).includes(myName)) {
+    res.cookie("username", myName);
     res.render("homepage", { name: myName });
   } else {
     return res.redirect("signup.html");
@@ -49,8 +52,20 @@ app.post("/trackName", (req, res) => {
     return res.redirect("signup.html");
   } else {
     res.cookie(`${myName}`, myName);
+    res.cookie("username", myName);
     return res.redirect(`/${myName}`);
   }
+});
+
+app.post("/logout", (req, res) => {
+  const { username } = req.cookies;
+  res.clearCookie("username");
+  res.clearCookie(username);
+  return res.redirect("/");
+});
+
+app.get("/signup", (req, res) => {
+  return res.redirect("signup.html");
 });
 
 app.listen(port, () => {
