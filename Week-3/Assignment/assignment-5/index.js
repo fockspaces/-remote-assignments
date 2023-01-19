@@ -44,7 +44,8 @@ const target = 9;
 // console.log(twoSum_3(nums, target));
 
 // testing
-const { data } = require("./data");
+const { data } = require("./data/data.json");
+console.log(data);
 let count = 0;
 
 const test = (func) => {
