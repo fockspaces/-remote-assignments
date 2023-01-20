@@ -31,7 +31,7 @@ router.get("/:myName", (req, res) => {
     res.cookie("username", myName);
     res.render("homepage", { name: myName });
   } else {
-    return res.render("signup");
+    return res.render("gosignup");
   }
 });
 
