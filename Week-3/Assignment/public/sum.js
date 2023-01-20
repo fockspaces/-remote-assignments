@@ -1,10 +1,7 @@
 // axios method
 const setTextAxios = async (number) => {
-  const fetchData = async (number) => {
-    const res = await axios.get(`http://localhost:3000/data?number=${number}`);
-    return res.data;
-  };
-  const data = await fetchData(number);
+  const res = await axios.get(`http://localhost:3000/data?number=${number}`);
+  const data = await res.data;
   document.querySelector(".message").innerHTML = data;
 };
 
@@ -21,6 +18,18 @@ const setTextHTTP = async (number) => {
   xhttp.send();
 };
 
+// Fetch API method
+const setTextFetch = async (number) => {
+  try {
+    const res = await fetch(`http://localhost:3000/data?number=${number}`);
+    const data = await res.json();
+    document.querySelector(".message").innerHTML = data.text;
+  } catch (e) {
+    // needed further knowledge to solve this
+    setTextAxios(number);
+  }
+};
+
 const inputForm = document.getElementById("inputForm");
 const inputText = document.getElementById("inputText");
 
@@ -28,4 +37,5 @@ inputForm.addEventListener("submit", (e) => {
   e.preventDefault();
   // setTextAxios(inputText.value);
   setTextHTTP(inputText.value);
+  // setTextFetch(inputText.value);
 });
