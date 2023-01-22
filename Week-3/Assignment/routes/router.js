@@ -30,10 +30,22 @@ router.get("/data", (req, res) => {
   }
 });
 
-router.get("/:myName", (req, res) => {
-  const { myName } = req.params;
-  if (Object.values(req.cookies).includes(myName)) {
-    res.cookie("username", myName);
+// custom usernames
+// router.get("/:myName", (req, res) => {
+//   const { myName } = req.params;
+//   if (Object.values(req.cookies).includes(myName)) {
+//     // res.cookie("username", myName);
+//     res.render("homepage", { name: myName });
+//   } else {
+//     return res.render("gosignup");
+//   }
+// });
+
+// only myName
+router.get("/myName", (req, res) => {
+  const { myName } = req.cookies;
+  console.log(myName);
+  if (myName) {
     res.render("homepage", { name: myName });
   } else {
     return res.render("gosignup");
@@ -46,16 +58,16 @@ router.post("/trackName", (req, res) => {
   if (myName == "") {
     return res.redirect("signup.html");
   } else {
-    res.cookie(`${myName}`, myName);
-    res.cookie("username", myName);
-    return res.redirect(`/${myName}`);
+    // res.cookie(`${myName}`, myName);
+    // res.cookie("username", myName);
+    res.cookie("myName", myName);
+    // return res.redirect(`/${myName}`);
+    return res.redirect(`/myName`);
   }
 });
 
 router.post("/logout", (req, res) => {
-  const { username } = req.cookies;
-  res.clearCookie("username");
-  res.clearCookie(username);
+  res.clearCookie("myName");
   return res.redirect("/");
 });
 
