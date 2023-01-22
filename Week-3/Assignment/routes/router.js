@@ -6,7 +6,10 @@ router.get("/", (req, res) => {
 });
 
 router.get("/data", (req, res) => {
-  if (!req.query.number) return res.render("error", { errorCODE: 1 });
+  if (!req.query.number) {
+    // return res.render("error", { errorCODE: 1 });
+    res.send("<h3>Lack of Parameter</h3>");
+  }
   if (Object.keys(req.query).length) {
     const num = +req.query.number;
 
@@ -18,10 +21,12 @@ router.get("/data", (req, res) => {
     if (Number.isInteger(num)) {
       res.send(renderedText);
     } else {
-      return res.render("error", { errorCODE: 2 });
+      // return res.render("error", { errorCODE: 2 });
+      res.send("<h3>Wrong Parameter (not an integer)</h3>");
     }
   } else {
-    return res.render("error", { errorCODE: 1 });
+    // return res.render("error", { errorCODE: 1 });
+    res.send("<h3>Lack of Parameter</h3>");
   }
 });
 
