@@ -10,24 +10,17 @@ router.get("/data", (req, res) => {
     // return res.render("error", { errorCODE: 1 });
     return res.send("<h3>Lack of Parameter</h3>");
   }
-  if (Object.keys(req.query).length) {
-    const num = +req.query.number;
 
-    // if integer => sum of 1 + 2 + ... + n else error message
-    const renderedText = `<h3>The sum of the number from (1 to ${num}) is : ${
-      (num * (num + 1)) / 2
-    }</h3>`;
+  const num = +req.query.number;
+  if (!Number.isInteger(num) || num < 0)
+    return res.send("<h3>Wrong Parameter (not an integer)</h3>");
 
-    if (Number.isInteger(num)) {
-      return res.send(renderedText);
-    } else {
-      // return res.render("error", { errorCODE: 2 });
-      return res.send("<h3>Wrong Parameter (not an integer)</h3>");
-    }
-  } else {
-    // return res.render("error", { errorCODE: 1 });
-    return res.send("<h3>Lack of Parameter</h3>");
-  }
+  // if integer => sum of 1 + 2 + ... + n else error message
+  const renderedText = `<h3>The sum of the number from (1 to ${num}) is : ${
+    (num * (num + 1)) / 2
+  }</h3>`;
+
+  return res.send(renderedText);
 });
 
 // custom usernames
