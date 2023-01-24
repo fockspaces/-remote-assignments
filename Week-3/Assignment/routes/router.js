@@ -8,7 +8,7 @@ router.get("/", (req, res) => {
 router.get("/data", (req, res) => {
   if (!req.query.number) {
     // return res.render("error", { errorCODE: 1 });
-    res.send("<h3>Lack of Parameter</h3>");
+    return res.send("<h3>Lack of Parameter</h3>");
   }
   if (Object.keys(req.query).length) {
     const num = +req.query.number;
@@ -19,14 +19,14 @@ router.get("/data", (req, res) => {
     }</h3>`;
 
     if (Number.isInteger(num)) {
-      res.send(renderedText);
+      return res.send(renderedText);
     } else {
       // return res.render("error", { errorCODE: 2 });
-      res.send("<h3>Wrong Parameter (not an integer)</h3>");
+      return res.send("<h3>Wrong Parameter (not an integer)</h3>");
     }
   } else {
     // return res.render("error", { errorCODE: 1 });
-    res.send("<h3>Lack of Parameter</h3>");
+    return res.send("<h3>Lack of Parameter</h3>");
   }
 });
 
@@ -44,9 +44,8 @@ router.get("/data", (req, res) => {
 // only myName
 router.get("/myName", (req, res) => {
   const { myName } = req.cookies;
-  console.log(myName);
   if (myName) {
-    res.render("homepage", { name: myName });
+    return res.render("homepage", { name: myName });
   } else {
     return res.render("gosignup");
   }
