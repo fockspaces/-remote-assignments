@@ -1,30 +1,26 @@
 const express = require("express");
 const mysql = require("mysql2");
+const user = require("./routes/user");
 
 const app = express();
+const port = 3000;
+
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(__dirname + "/public"));
 
-// const db = mysql.createConnection({
-//   host: "localhost",
-//   user: "root",
-//   database: "assignment",
-// });
-
-// db.connect();
-
-app.get("/", (req, res) => {
-  res.redirect('homepage.html')
+// database config
+const db = mysql.createConnection({
+  host: "localhost",
+  user: "root",
+  database: "assignment",
+  password: "***REMOVED***",
 });
 
-app.post("/signup", (req, res) => {
-  console.log("signup");
-});
+db.connect();
 
-app.post("/login", async (req, res) => {
-  console.log(req.body);
-});
+// routers
+app.use("/user", user);
 
-app.listen("3000", () => {
-  console.log("server started");
+app.listen(port, () => {
+  console.log(`listening on ${port}`);
 });
