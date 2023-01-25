@@ -1,4 +1,4 @@
-const axios = require("axios");
+import axios from "axios";
 
 const signupForm = document.getElementById("signup");
 const loginForm = document.getElementById("login");

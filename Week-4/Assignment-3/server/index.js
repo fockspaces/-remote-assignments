@@ -5,8 +5,8 @@ const user = require("./routes/user");
 const app = express();
 const port = 3000;
 
-app.use(express.urlencoded({ extended: false }));
-app.use(express.static(__dirname + "/public"));
+app.use(express.json()); // to support JSON-encoded bodies
+app.use(express.urlencoded({ extended: true })); // to support URL-encoded bodies
 
 // database config
 const db = mysql.createConnection({
@@ -19,6 +19,7 @@ const db = mysql.createConnection({
 db.connect();
 
 // routers
+app.use(express.static(__dirname + "/public"));
 app.use("/user", user);
 
 app.listen(port, () => {
