@@ -3,12 +3,19 @@ const user = express.Router();
 const { auth, login, signup, getAccounts } = require("../controllers/users");
 
 user.get("/", (req, res) => {
-  res.render("accounts/homepage");
+  res.render("homepage");
+});
+
+user.get("/login", (req, res) => {
+  res.render("accounts/login");
+});
+
+user.get("/signup", (req, res) => {
+  res.render("accounts/signup");
 });
 
 user.get("/accounts", async (req, res) => {
   const accounts = await getAccounts();
-  console.log(accounts);
   res.render("accounts/index", { accounts });
 });
 
