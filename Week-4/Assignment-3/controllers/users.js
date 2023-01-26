@@ -1,5 +1,10 @@
 const { getAllUsers, registerUser, checkUser } = require("../models/User");
 
+const getAccounts = async (req, res) => {
+  const users = await getAllUsers();
+  return users;
+};
+
 const auth = async (req, res, next) => {
   const { email, password } = req.body;
   const users = await getAllUsers();
@@ -17,7 +22,7 @@ const signup = async (req, res) => {
   try {
     const { email, password } = req.body;
     const user = await checkUser(email);
-    if (user) return res.status(409).send("this account has been registered");
+    if (user.length) return res.status(409).send("User already exists");
     await registerUser({ email, password });
     return res.redirect("/users");
   } catch (e) {
@@ -29,4 +34,5 @@ module.exports = {
   auth,
   login,
   signup,
+  getAccounts,
 };
