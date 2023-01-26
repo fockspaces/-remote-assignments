@@ -12,33 +12,36 @@ db.connect();
 
 const getAllUsers = () => {
   return new Promise((resolve, reject) => {
-    try {
-      const sql = `SELECT * FROM user;`;
-      db.query(sql, (err, result) => {
-        if (err) return reject(err);
-        return resolve(result);
-      });
-    } catch (e) {
-      reject(e);
-    }
+    const sql = `SELECT * FROM user;`;
+    db.query(sql, (err, result) => {
+      if (err) reject(err);
+      resolve(result);
+    });
   });
 };
 
 const registerUser = (user) => {
   return new Promise((resolve, reject) => {
-    try {
-      const sql = `INSERT INTO user (email, password) values ('${user.email}', '${user.password}');`;
-      db.query(sql, (err, result) => {
-        if (err) return reject(err);
-        return resolve(result);
-      });
-    } catch (e) {
-      reject(e);
-    }
+    const sql = `INSERT INTO user (email, password) values (?, ?);`;
+    db.query(sql, [user.email, user.password], (err, result) => {
+      if (err) reject(err);
+      resolve(result);
+    });
+  });
+};
+
+const checkUser = (email) => {
+  return new Promise((resovle, reject) => {
+    const sql = `SELECT * FROM user WHERE email = '${email}';`;
+    db.query(sql, (err, result) => {
+      if (err) reject(err);
+      resovle(result);
+    });
   });
 };
 
 module.exports = {
   getAllUsers,
   registerUser,
+  checkUser,
 };

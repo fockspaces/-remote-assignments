@@ -1,4 +1,4 @@
-const { getAllUsers, registerUser } = require("../models/User");
+const { getAllUsers, registerUser, checkUser } = require("../models/User");
 
 const auth = async (req, res, next) => {
   const { email, password } = req.body;
@@ -16,10 +16,12 @@ const login = async (req, res) => {
 const signup = async (req, res) => {
   try {
     const { email, password } = req.body;
-    const res = await registerUser({ email, password });
-    console.log(res);
+    const user = await checkUser(email);
+    if (user) return res.status(409).send("this account has been registered");
+    await registerUser({ email, password });
+    return res.redirect("/users");
   } catch (e) {
-    console.log('error:', e.message);
+    console.log("error:", e.message);
   }
 };
 

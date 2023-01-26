@@ -12,8 +12,8 @@ app.use(express.urlencoded({ extended: true })); // to support URL-encoded bodie
 app.use("/users", user);
 
 // template engine
-app.set('view engine', 'pug');
-app.set('views', path.join(__dirname, 'views'));
+app.set("view engine", "pug");
+app.set("views", path.join(__dirname, "views"));
 
 app.listen(port, () => {
   console.log(`listening on ${port}`);
