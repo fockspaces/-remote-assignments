@@ -1,8 +1,13 @@
 const express = require("express");
 const user = express.Router();
+const { auth } = require("../controllers/users");
 
 user.get("/", (req, res) => {
   res.redirect("homepage.html");
+});
+
+user.get("/member", (req, res) => {
+  res.redirect("member.html");
 });
 
 user.post("/signup", async (req, res) => {
@@ -15,19 +20,6 @@ user.post("/signup", async (req, res) => {
   });
 });
 
-user.post("/login", (req, res) => {
-  const { email, password } = req.body;
-  const sql = `SELECT * FROM user;`;
-  db.query(sql, (err, result) => {
-    if (err) throw err;
-
-    if (
-      result.find((user) => user.email === email && user.password === password)
-    )
-      return res.status(200).send({ action: "goMemberPage" });
-
-    return res.status(404).send({ action: "showWrongMessage" });
-  });
-});
+user.post("/login", auth);
 
 module.exports = user;
