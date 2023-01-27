@@ -1,16 +1,19 @@
 extends ../layouts/boilerplates.pug
 
 block content
-    .card-body
-        h5.card-title.mb-3 Edit Article 
-        form#edit.validated-form(action=`/article/${article.id}?_method=PUT` method='POST')
-            input(type="hidden" value=article.id name='article[id]')
-            // title
-            .mb-3
-                label.form-label(for='title') title
-                input#title.form-control(value=article.title type='text' name='article[title]' autofocus='' required='')
-            // content
-            .mb-3
-                label.form-label(for='content') content
-                textarea#content.form-control(name='article[content]' required='')=article.content
-                button.btn.btn-success.col-12.mt-2 Edit
+    .row 
+        h2.text-center Edit Article 
+        .col-6.offset-3
+            form#edit(action=`/article/${article.id}?_method=PUT` method='POST')
+                input(type="hidden" value=article.id name='article[id]')
+                // title
+                .mb-3
+                    label.form-label(for='title') title
+                    input#title.form-control(value=article.title type='text' name='article[title]' autofocus='' required='')
+                // content
+                .mb-3
+                    label.form-label(for='content') content
+                    textarea#content.form-control(name='article[content]' required='')=article.content
+                    button.btn.btn-success.col-12.mt-3 Edit
+
+            a.btn.btn-primary(href=`/article`) return  

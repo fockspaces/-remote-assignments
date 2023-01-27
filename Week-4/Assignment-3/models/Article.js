@@ -12,7 +12,7 @@ db.connect();
 
 const getAllArticles = () => {
   return new Promise((resolve, reject) => {
-    const sql = `SELECT * FROM article;`;
+    const sql = `SELECT * FROM article ORDER BY id DESC;`;
     db.query(sql, (err, result) => {
       if (err) reject(err);
       resolve(result);

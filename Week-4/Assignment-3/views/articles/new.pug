@@ -1,15 +1,19 @@
 extends ../layouts/boilerplates.pug
 
 block content
-    .card-body
-        h5.card-title.mb-3 New Article 
-        form#login.validated-form(action='/article' method='POST')
-            // title
-            .mb-3
-                label.form-label(for='title') title
-                input#title.form-control(type='text' name='article[title]' autofocus='' required='')
-            // content
-            .mb-3
-                label.form-label(for='content') content
-                textarea#content.form-control(name='article[content]' required='')
-                button.btn.btn-success.col-12.mt-2 Create
+    .row
+        h2.text-center New Article 
+
+        .col-6.offset-3
+            form#login(action='/article' method='POST')
+                // title
+                .mb-3
+                    label.form-label(for='title') title
+                    input#title.form-control(type='text' name='article[title]' autofocus='' required='')
+                // content
+                .mb-3
+                    label.form-label(for='content') content
+                    textarea#content.form-control(name='article[content]' required='' style="white-space: pre-line;")
+                    button.btn.btn-success.col-12.mt-3 Create
+
+            a.btn.btn-primary(href=`/article`) return  

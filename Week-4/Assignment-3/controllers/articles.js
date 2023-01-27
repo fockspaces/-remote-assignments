@@ -38,7 +38,7 @@ const addNewArticle = async (req, res) => {
   try {
     const { article } = req.body;
     await addArticle(article);
-    res.render("articles/article", { article });
+    res.redirect("/article");
   } catch (e) {
     console.log("error:", e.message);
   }
@@ -69,7 +69,7 @@ const deletePost = async (req, res) => {
 // authID
 const authID = async (req, res, next) => {
   const { id } = req.params;
-  if (!id || isNaN(id)) return res.send("post id is not valid");
+  if (!id || isNaN(id)) return res.status(400).send("post id is not valid");
   next();
 };
 

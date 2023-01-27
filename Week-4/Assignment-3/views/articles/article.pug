@@ -1,12 +1,20 @@
 extends ../layouts/boilerplates.pug
 
 block content
-    h3= article.title 
-    p= article.content
+      .card
+            .card-header
+                  h5.card-title= article.title
+                  h6.card-subtitle= article.authorName
+            .card-body
+                  p.card-text= article.content
 
-    a(href=`/article/${article.id}/edit` class="btn btn-success") edit 
-    <br><br>
-    form#delete.validated-form(action=`/article/${article.id}?_method=delete` method='POST')
-          input(type='submit', value='Delete' class="btn btn-danger")
-    <br><br>
-    a(href=`/article` class="btn btn-primary") return <br>
+            .card-footer.d-flex.justify-content-between
+                  .col-sm-9
+                        a(href=`/article` class="btn btn-primary") return  
+                  .col-sm-2
+                        .row.d-flex.justify-content-betwee
+                              .col 
+                                    a.btn.btn-success(href=`/article/${article.id}/edit`) edit
+                              .col
+                                    form#delete(action=`/article/${article.id}?_method=delete` method='POST')
+                                          input.btn.btn-danger.mr-2(type='submit' value='Delete')
