@@ -6,15 +6,15 @@ block content
                   h5.card-title= article.title
                   h6.card-subtitle= article.authorName
             .card-body
-                  p.card-text= article.content
+                  p.card-text(style="white-space: pre-line")= article.content
 
             .card-footer.d-flex.justify-content-between
                   .col-sm-9
-                        a(href=`/article` class="btn btn-primary") return  
+                        a.mt-2(href=`/article` class="btn btn-primary") Return  
                   .col-sm-2
                         .row.d-flex.justify-content-betwee
                               .col 
-                                    a.btn.btn-success(href=`/article/${article.id}/edit`) edit
+                                    a.btn.btn-success.mt-2(href=`/article/${article.id}/edit`) Edit
                               .col
                                     form#delete(action=`/article/${article.id}?_method=delete` method='POST')
-                                          input.btn.btn-danger.mr-2(type='submit' value='Delete')
+                                          input.btn.btn-danger.mt-2(type='submit' value='Delete')

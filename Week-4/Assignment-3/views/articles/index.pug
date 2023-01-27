@@ -1,10 +1,14 @@
 extends ../layouts/boilerplates.pug
 
 block content
-    h1 article lists
+    h1 List of Articles 
     h2
         a(href='article/new' class="btn btn-primary") New
-    ul 
-        each article in articles
-            li
-                a(href=`article/${article.id}`)= article.title 
+
+    each article in articles
+        .card.mt-2
+            .card-body 
+                h5.card-title
+                    a.link-dark(href=`article/${article.id}`)= article.title 
+                h6.card-subtitle= article.authorName 
+                p.card-text= article.content.slice(0, 50)+'...'
