@@ -1,6 +1,6 @@
 const express = require("express");
-const user = require("./routes/users");
-const article = require("./routes/articles");
+const user = require("./routes/user");
+const article = require("./routes/article");
 const path = require("path");
 
 const app = express();
@@ -13,8 +13,8 @@ app.use(express.urlencoded({ extended: true })); // to support URL-encoded bodie
 app.get("/", (req, res) => {
   res.render("homepage");
 });
-app.use("/users", user);
-app.use("/articles", article);
+app.use("/user", user);
+app.use("/article", article);
 
 // template engine
 app.set("view engine", "pug");

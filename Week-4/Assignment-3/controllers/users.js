@@ -5,6 +5,19 @@ const {
   getOneUser,
 } = require("../models/User");
 
+// display
+const renderUsers = (req, res) => {
+  res.render("homepage");
+};
+
+const renderLogin = (req, res) => {
+  res.render("users/login");
+};
+
+const renderSignup = (req, res) => {
+  res.render("users/signup");
+};
+
 const getUsers = async () => {
   const users = await getAllUsers();
   return users;
@@ -46,4 +59,7 @@ module.exports = {
   signup,
   getUsers,
   getUser,
+  renderUsers,
+  renderLogin,
+  renderSignup,
 };
