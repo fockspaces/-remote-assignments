@@ -51,9 +51,20 @@ const UpdatePost = (article) => {
   });
 };
 
+const DeletePost = (id) => {
+  return new Promise((resolve, reject) => {
+    const sql = "DELETE FROM article WHERE id=?";
+    db.query(sql, [id], (err, result) => {
+      if (err) reject(err);
+      resolve(result);
+    });
+  });
+};
+
 module.exports = {
   getAllArticles,
   getOneArticle,
   addArticle,
   UpdatePost,
+  DeletePost,
 };

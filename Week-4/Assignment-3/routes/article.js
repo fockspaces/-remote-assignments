@@ -8,6 +8,7 @@ article.get("/new", articles.renderArticles);
 
 article.get("/:id", articles.renderArticle);
 article.put("/:id", articles.updatePost);
+article.delete("/:id", articles.deletePost);
 
 article.get("/:id/edit", articles.renderEdit);
 

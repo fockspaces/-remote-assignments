@@ -3,6 +3,7 @@ const {
   getOneArticle,
   addArticle,
   UpdatePost,
+  DeletePost,
 } = require("../models/Article");
 
 // display
@@ -54,6 +55,17 @@ const updatePost = async (req, res) => {
   }
 };
 
+// Delete
+const deletePost = async (req, res) => {
+  try {
+    const { id } = req.params;
+    await DeletePost(id);
+    res.redirect(`/article`);
+  } catch (e) {
+    console.log("error:", e.message);
+  }
+};
+
 module.exports = {
   getArticles,
   getArticle,
@@ -62,4 +74,5 @@ module.exports = {
   renderArticle,
   renderEdit,
   updatePost,
+  deletePost,
 };

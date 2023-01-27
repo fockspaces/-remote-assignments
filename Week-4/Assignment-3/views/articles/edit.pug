@@ -3,7 +3,7 @@ extends ../layouts/boilerplates.pug
 block content
     .card-body
         h5.card-title.mb-3 Edit Article 
-        form#login.validated-form(action=`/article/${article.id}?_method=PUT` method='POST')
+        form#edit.validated-form(action=`/article/${article.id}?_method=PUT` method='POST')
             input(type="hidden" value=article.id name='article[id]')
             // title
             .mb-3
