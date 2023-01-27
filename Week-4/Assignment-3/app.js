@@ -10,6 +10,9 @@ app.use(express.urlencoded({ extended: true })); // to support URL-encoded bodie
 
 // routers
 app.use("/users", user);
+app.get("/", (req, res) => {
+  res.redirect("/users");
+});
 
 // template engine
 app.set("view engine", "pug");

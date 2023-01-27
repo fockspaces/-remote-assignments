@@ -1,8 +1,18 @@
-const { getAllUsers, registerUser, checkUser } = require("../models/User");
+const {
+  getAllUsers,
+  registerUser,
+  checkUser,
+  getOneUser,
+} = require("../models/User");
 
-const getAccounts = async (req, res) => {
+const getUsers = async () => {
   const users = await getAllUsers();
   return users;
+};
+
+const getUser = async (id) => {
+  const user = await getOneUser(id);
+  return user[0];
 };
 
 const auth = async (req, res, next) => {
@@ -34,5 +44,6 @@ module.exports = {
   auth,
   login,
   signup,
-  getAccounts,
+  getUsers,
+  getUser,
 };

@@ -20,6 +20,16 @@ const getAllUsers = () => {
   });
 };
 
+const getOneUser = (id) => {
+  return new Promise((resolve, reject) => {
+    const sql = `SELECT * FROM user WHERE id = ${id};`;
+    db.query(sql, (err, result) => {
+      if (err) reject(err);
+      resolve(result);
+    });
+  });
+};
+
 const registerUser = (user) => {
   return new Promise((resolve, reject) => {
     const sql = `INSERT INTO user (email, password) values (?, ?);`;
@@ -44,4 +54,5 @@ module.exports = {
   getAllUsers,
   registerUser,
   checkUser,
+  getOneUser,
 };
