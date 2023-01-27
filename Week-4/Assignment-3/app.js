@@ -1,5 +1,6 @@
 const express = require("express");
 const user = require("./routes/users");
+const article = require("./routes/articles");
 const path = require("path");
 
 const app = express();
@@ -9,10 +10,11 @@ app.use(express.json()); // to support JSON-encoded bodies
 app.use(express.urlencoded({ extended: true })); // to support URL-encoded bodies
 
 // routers
-app.use("/users", user);
 app.get("/", (req, res) => {
-  res.redirect("/users");
+  res.render("hompage");
 });
+app.use("/users", user);
+app.use("/article", article);
 
 // template engine
 app.set("view engine", "pug");

@@ -12,13 +12,19 @@ user.get("/", (req, res) => {
   res.render("homepage");
 });
 
-user.get("/login", (req, res) => {
-  res.render("users/login");
-});
+user
+  .route("/login")
+  .get((req, res) => {
+    res.render("users/login");
+  })
+  .post(auth, login);
 
-user.get("/signup", (req, res) => {
-  res.render("users/signup");
-});
+user
+  .route("/signup")
+  .get((req, res) => {
+    res.render("users/signup");
+  })
+  .post(signup);
 
 user.get("/members", async (req, res) => {
   const users = await getUsers();
@@ -30,9 +36,5 @@ user.get("/members/:id", async (req, res) => {
   const user = await getUser(id);
   res.render("users/memberPage", { user });
 });
-
-user.post("/signup", signup);
-
-user.post("/login", auth, login);
 
 module.exports = user;
