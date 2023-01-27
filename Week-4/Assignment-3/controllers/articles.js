@@ -14,8 +14,14 @@ const getArticle = async (id) => {
   return article[0];
 };
 
-const addNewArticle = async (article) => {
-  await addArticle(article);
+const addNewArticle = async (req, res) => {
+  try {
+    const { article } = req.body;
+    await addArticle(article);
+    res.render("articles/article", { article });
+  } catch (e) {
+    console.log("error:", e.message);
+  }
 };
 
 module.exports = {

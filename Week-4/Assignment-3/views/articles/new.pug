@@ -6,10 +6,10 @@ block content
         form#login.validated-form(action='/articles' method='POST')
             // title
             .mb-3
-                label.form-label(for='email') title
-                input#email.form-control(type='text' name='article[title]' autofocus='' required='')
+                label.form-label(for='title') title
+                input#title.form-control(type='text' name='article[title]' autofocus='' required='')
             // content
             .mb-3
-                label.form-label(for='password') content
-                input#password.form-control(type='textarea' name='article[content]' required='')
+                label.form-label(for='content') content
+                input#content.form-control(type='textarea' name='article[content]' required='')
             button.btn.btn-success.col-12.mt-2 Create

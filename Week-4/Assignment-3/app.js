@@ -11,7 +11,7 @@ app.use(express.urlencoded({ extended: true })); // to support URL-encoded bodie
 
 // routers
 app.get("/", (req, res) => {
-  res.render("hompage");
+  res.render("homepage");
 });
 app.use("/users", user);
 app.use("/articles", article);

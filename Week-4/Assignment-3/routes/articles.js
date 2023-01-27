@@ -11,11 +11,7 @@ article.get("/", async (req, res) => {
   res.render("articles/index", { articles });
 });
 
-article.post("/", async (req, res) => {
-  const { article } = req.body;
-  await addNewArticle(article);
-  res.render("articles/article", { article });
-});
+article.post("/", addNewArticle);
 
 article.get("/new", async (req, res) => {
   res.render("articles/new");
