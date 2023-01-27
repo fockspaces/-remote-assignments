@@ -1,4 +1,8 @@
-const { getAllArticles, getOneArticle } = require("../models/Article");
+const {
+  getAllArticles,
+  getOneArticle,
+  addArticle,
+} = require("../models/Article");
 
 const getArticles = async () => {
   const articles = await getAllArticles();
@@ -10,7 +14,12 @@ const getArticle = async (id) => {
   return article[0];
 };
 
+const addNewArticle = async (article) => {
+  await addArticle(article);
+};
+
 module.exports = {
   getArticles,
   getArticle,
+  addNewArticle,
 };

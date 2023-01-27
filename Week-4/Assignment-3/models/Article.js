@@ -30,7 +30,18 @@ const getOneArticle = (id) => {
   });
 };
 
+const addArticle = (article) => {
+  return new Promise((resolve, reject) => {
+    const sql = `INSERT INTO article (title, content) values (?, ?);`;
+    db.query(sql, [article.title, article.content], (err, result) => {
+      if (err) reject(err);
+      resolve(result);
+    });
+  });
+};
+
 module.exports = {
   getAllArticles,
   getOneArticle,
+  addArticle,
 };

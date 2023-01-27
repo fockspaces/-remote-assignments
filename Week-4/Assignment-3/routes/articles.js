@@ -1,16 +1,29 @@
 const express = require("express");
 const article = express.Router();
-const { getArticles, getArticle } = require("../controllers/articles");
+const {
+  getArticles,
+  getArticle,
+  addNewArticle,
+} = require("../controllers/articles");
 
 article.get("/", async (req, res) => {
   const articles = await getArticles();
   res.render("articles/index", { articles });
 });
 
+article.post("/", async (req, res) => {
+  const { article } = req.body;
+  await addNewArticle(article);
+  res.render("articles/article", { article });
+});
+
+article.get("/new", async (req, res) => {
+  res.render("articles/new");
+});
+
 article.get("/:id", async (req, res) => {
   const { id } = req.params;
   const article = await getArticle(id);
-  console.log(article);
   res.render("articles/article", { article });
 });
 

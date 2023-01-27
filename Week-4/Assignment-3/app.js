@@ -14,7 +14,7 @@ app.get("/", (req, res) => {
   res.render("hompage");
 });
 app.use("/users", user);
-app.use("/article", article);
+app.use("/articles", article);
 
 // template engine
 app.set("view engine", "pug");
