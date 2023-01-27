@@ -7,5 +7,8 @@ article.route("/").get(articles.getArticles).post(articles.addNewArticle);
 article.get("/new", articles.renderArticles);
 
 article.get("/:id", articles.renderArticle);
+article.put("/:id", articles.updatePost);
+
+article.get("/:id/edit", articles.renderEdit);
 
 module.exports = article;

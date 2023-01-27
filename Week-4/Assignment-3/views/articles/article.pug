@@ -4,4 +4,6 @@ block content
     h3= article.title 
     p= article.content
 
+    a(href=`/article/${article.id}/edit` class="btn btn-primary") edit 
+    <br><br>
     a(href=`/article` class="btn btn-primary") return <br>

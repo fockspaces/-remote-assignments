@@ -1,4 +1,6 @@
 const express = require("express");
+const methodOverride = require("method-override");
+
 const user = require("./routes/user");
 const article = require("./routes/article");
 const path = require("path");
@@ -8,6 +10,7 @@ const port = 3000;
 
 app.use(express.json()); // to support JSON-encoded bodies
 app.use(express.urlencoded({ extended: true })); // to support URL-encoded bodies
+app.use(methodOverride("_method"));
 
 // routers
 app.get("/", (req, res) => {

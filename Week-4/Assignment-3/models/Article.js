@@ -40,8 +40,20 @@ const addArticle = (article) => {
   });
 };
 
+const UpdatePost = (article) => {
+  return new Promise((resolve, reject) => {
+    const { id, title, content } = article;
+    const sql = "UPDATE article SET title=?, content=? WHERE id=?";
+    db.query(sql, [title, content, id], (err, result) => {
+      if (err) reject(err);
+      resolve(result);
+    });
+  });
+};
+
 module.exports = {
   getAllArticles,
   getOneArticle,
   addArticle,
+  UpdatePost,
 };
