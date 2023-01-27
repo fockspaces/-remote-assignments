@@ -4,15 +4,17 @@ block content
     .row
         h2.text-center New Article 
 
-        .col-6.offset-3
+        .col-6.offset-3.mt-2
             form#login(action='/article' method='POST')
                 // title
                 .mb-3
-                    label.form-label(for='title') title
+                    h4
+                        label.form-label(for='title') Title
                     input#title.form-control(type='text' name='article[title]' autofocus='' required='')
                 // content
                 .mb-3
-                    label.form-label(for='content') content
+                    h4
+                        label.form-label(for='content') Content
                     textarea#content.form-control(rows="10" name='article[content]' required='' style="white-space: pre-wrap;")
                     button.btn.btn-success.col-12.mt-3 Create
 
