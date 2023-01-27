@@ -23,6 +23,10 @@ app.use("/article", article);
 app.set("view engine", "pug");
 app.set("views", path.join(__dirname, "views"));
 
+app.use((req, res) => {
+  res.status(404).send("Sorry, that page doesn't exist.");
+});
+
 app.listen(port, () => {
   console.log(`listening on ${port}`);
 });

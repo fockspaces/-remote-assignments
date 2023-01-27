@@ -4,7 +4,7 @@ block content
     h3= article.title 
     p= article.content
 
-    a(href=`/article/${article.id}/edit` class="btn btn-primary") edit 
+    a(href=`/article/${article.id}/edit` class="btn btn-success") edit 
     <br><br>
     form#delete.validated-form(action=`/article/${article.id}?_method=delete` method='POST')
           input(type='submit', value='Delete' class="btn btn-danger")
