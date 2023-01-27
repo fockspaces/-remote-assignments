@@ -32,7 +32,7 @@ const auth = async (req, res, next) => {
   const { email, password } = req.body;
   const users = await getAllUsers();
   if (!users.find((user) => user.password === password && user.email === email))
-    return res.redirect("/users");
+    return res.redirect("/user");
 
   next();
 };
@@ -47,7 +47,7 @@ const signup = async (req, res) => {
     const user = await checkUser(email);
     if (user.length) return res.status(409).send("User already exists");
     await registerUser({ email, password });
-    return res.redirect("/users");
+    return res.redirect("/user");
   } catch (e) {
     console.log("error:", e.message);
   }
