@@ -66,6 +66,13 @@ const deletePost = async (req, res) => {
   }
 };
 
+// authID
+const authID = async (req, res, next) => {
+  const { id } = req.params;
+  if (!id || isNaN(id)) return res.send("post id is not valid");
+  next();
+};
+
 module.exports = {
   getArticles,
   getArticle,
@@ -75,4 +82,5 @@ module.exports = {
   renderEdit,
   updatePost,
   deletePost,
+  authID,
 };
