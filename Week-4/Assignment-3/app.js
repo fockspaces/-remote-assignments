@@ -19,6 +19,7 @@ app.use(
     secret: "secretKey",
     resave: false,
     saveUninitialized: true,
+    cookie: { maxAge: 7 * 24 * 60 * 60 * 1000 },
   })
 );
 app.use(flash());

@@ -46,6 +46,11 @@ const login = async (req, res) => {
   return res.status(200).redirect("/article");
 };
 
+const logout = (req, res) => {
+  req.session.destroy();
+  res.redirect("/article");
+};
+
 const signup = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -77,4 +82,5 @@ module.exports = {
   renderLogin,
   renderSignup,
   checkStatus,
+  logout,
 };
