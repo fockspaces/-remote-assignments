@@ -1,5 +1,7 @@
 const express = require("express");
 const methodOverride = require("method-override");
+const flash = require("connect-flash");
+const session = require("express-session");
 
 const user = require("./routes/user");
 const article = require("./routes/article");
@@ -11,6 +13,24 @@ const port = 3000;
 app.use(express.json()); // to support JSON-encoded bodies
 app.use(express.urlencoded({ extended: true })); // to support URL-encoded bodies
 app.use(methodOverride("_method"));
+// configure express-session
+app.use(
+  session({
+    secret: "secretKey",
+    resave: false,
+    saveUninitialized: true,
+  })
+);
+app.use(flash());
+// login status middleware
+app.use(user.checkStatus);
+
+// alert check middleware
+app.use((req, res, next) => {
+  res.locals.success = req.flash("success");
+  res.locals.error = req.flash("error");
+  next();
+});
 
 // routers
 app.get("/", (req, res) => {

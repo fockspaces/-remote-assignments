@@ -31,14 +31,19 @@ const getUser = async (id) => {
 const auth = async (req, res, next) => {
   const { email, password } = req.body;
   const users = await getAllUsers();
-  if (!users.find((user) => user.password === password && user.email === email))
-    return res.redirect("/user");
-
+  if (
+    !users.find((user) => user.password === password && user.email === email)
+  ) {
+    req.flash("error", "Invalid username or password.");
+    return res.status(401).redirect("/user/login");
+  }
   next();
 };
 
 const login = async (req, res) => {
-  return res.status(200).send("rendering in member page");
+  req.session.isLoggedIn = true;
+  req.flash("success", "You have successfully logged in.");
+  return res.status(200).redirect("/article");
 };
 
 const signup = async (req, res) => {
@@ -53,6 +58,15 @@ const signup = async (req, res) => {
   }
 };
 
+const checkStatus = (req, res, next) => {
+  if (req.session.isLoggedIn) {
+    res.locals.isLoggedIn = true;
+  } else {
+    res.locals.isLoggedIn = false;
+  }
+  next();
+};
+
 module.exports = {
   auth,
   login,
@@ -62,4 +76,5 @@ module.exports = {
   renderUsers,
   renderLogin,
   renderSignup,
+  checkStatus,
 };

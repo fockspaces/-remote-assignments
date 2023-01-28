@@ -1,0 +1,7 @@
+block alert
+    if success && success.length
+        .alert.alert-success
+            = success
+    if error && error.length
+        .alert.alert-danger
+            = error
