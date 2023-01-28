@@ -5,12 +5,13 @@ const {
   UpdatePost,
   DeletePost,
 } = require("../models/Article");
+const { catchAsync } = require("../utils/errorHandler");
 
 // display
-const getArticles = async (req, res) => {
+const getArticles = catchAsync(async (req, res) => {
   const articles = await getAllArticles();
   res.render("articles/index", { articles });
-};
+});
 
 const getArticle = async (id) => {
   const article = await getOneArticle(id);
@@ -66,10 +67,22 @@ const deletePost = async (req, res) => {
   }
 };
 
-// authID
-const authID = async (req, res, next) => {
+const isAuthor = async (req, res, next) => {
   const { id } = req.params;
-  if (!id || isNaN(id)) return res.status(400).send("post id is not valid");
+  if (!id || isNaN(id)) {
+    req.flash("error", "post id is not valid");
+    return res.status(400).redirect(`/article/${id}`);
+  }
+
+  const article = await getOneArticle(id);
+  if (
+    !req.session.currentUser ||
+    req.session.currentUser[0].id != article[0].authorID
+  ) {
+    req.flash("error", "you don't have permission");
+    return res.status(400).redirect(`/article/${id}`);
+  }
+
   next();
 };
 
@@ -82,5 +95,5 @@ module.exports = {
   renderEdit,
   updatePost,
   deletePost,
-  authID,
+  isAuthor,
 };

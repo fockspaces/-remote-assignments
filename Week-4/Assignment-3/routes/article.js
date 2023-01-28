@@ -6,13 +6,12 @@ article.route("/").get(articles.getArticles).post(articles.addNewArticle);
 
 article.get("/new", articles.renderArticles);
 
-article.use("/:id", articles.authID);
 article
   .route("/:id")
   .get(articles.renderArticle)
-  .put(articles.updatePost)
-  .delete(articles.deletePost);
+  .put(articles.isAuthor, articles.updatePost)
+  .delete(articles.isAuthor, articles.deletePost);
 
-article.get("/:id/edit", articles.renderEdit);
+article.get("/:id/edit", articles.isAuthor, articles.renderEdit);
 
 module.exports = article;
