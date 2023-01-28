@@ -1,7 +1,7 @@
 block alert
     if success && success.length
-        .alert.alert-success.align-middle
+        .alert.alert-success.align-middle#success-alert
             = success
     if error && error.length
-        .alert.alert-danger.align-middle
+        .alert.alert-danger.align-middle#error-alert
             = error

@@ -69,6 +69,14 @@ const isAuthor = catchAsync(async (req, res, next) => {
   next();
 });
 
+const isLoggedIn = (req, res, next) => {
+  if (!req.session.currentUser) {
+    req.flash("error", "you don't have permission");
+    return res.status(400).redirect(`/`);
+  }
+  next();
+};
+
 module.exports = {
   getArticles,
   addNewArticle,
@@ -78,4 +86,5 @@ module.exports = {
   updatePost,
   deletePost,
   isAuthor,
+  isLoggedIn,
 };

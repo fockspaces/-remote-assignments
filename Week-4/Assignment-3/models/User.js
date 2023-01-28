@@ -32,8 +32,8 @@ const getOneUser = (id) => {
 
 const registerUser = (user) => {
   return new Promise((resolve, reject) => {
-    const sql = `INSERT INTO user (email, password) values (?, ?);`;
-    db.query(sql, [user.email, user.password], (err, result) => {
+    const sql = `INSERT INTO user (email, password, username) values (?, ?, ?);`;
+    db.query(sql, [user.email, user.password, user.username], (err, result) => {
       if (err) reject(err);
       resolve(result);
     });

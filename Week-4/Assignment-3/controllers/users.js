@@ -33,7 +33,7 @@ const getUser = catchAsync(async (id) => {
 
 // POST
 const login = catchAsync(async (req, res) => {
-  const { email, id } = req.body;
+  const { email } = req.body.user;
   const user = await checkUser(email);
   req.session.currentUser = user;
 
@@ -46,20 +46,20 @@ const logout = (req, res) => {
   res.redirect("/article");
 };
 
-const signup = catchAsync(async (req, res) => {
-  const { email, password } = req.body;
-  const user = await checkUser(email);
-  if (user.length) {
+const signup = catchAsync(async (req, res, next) => {
+  const { user } = req.body;
+  const userExist = await checkUser(user.email);
+  if (userExist.length) {
     req.flash("error", "User already exists");
     return res.status(409).redirect("/user/signup");
   }
-  await registerUser({ email, password });
-  return res.redirect("/user");
+  await registerUser(user);
+  next();
 });
 
 // middlewire
 const auth = catchAsync(async (req, res, next) => {
-  const { email, password } = req.body;
+  const { email, password } = req.body.user;
   const users = await getAllUsers();
   const user = users.find((user) => user.email === email);
   if (!user) {

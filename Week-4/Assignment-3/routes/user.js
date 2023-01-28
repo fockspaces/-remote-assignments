@@ -6,7 +6,7 @@ user.get("/", users.renderUsers);
 
 user.route("/login").get(users.renderLogin).post(users.auth, users.login);
 
-user.route("/signup").get(users.renderSignup).post(users.signup);
+user.route("/signup").get(users.renderSignup).post(users.signup, users.login);
 
 user.post("/logout", users.logout);
 
