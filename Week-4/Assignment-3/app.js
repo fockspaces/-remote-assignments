@@ -5,6 +5,8 @@ const session = require("express-session");
 
 const user = require("./routes/user");
 const article = require("./routes/article");
+const { notFound, errorHandler } = require("./utils/errorHandler");
+
 const path = require("path");
 
 const app = express();
@@ -27,11 +29,7 @@ app.use(flash());
 app.use(user.checkStatus);
 
 // alert check middleware
-app.use((req, res, next) => {
-  res.locals.success = req.flash("success");
-  res.locals.error = req.flash("error");
-  next();
-});
+app.use(user.checkalert);
 
 // routers
 app.get("/", (req, res) => {
@@ -44,9 +42,8 @@ app.use("/article", article);
 app.set("view engine", "pug");
 app.set("views", path.join(__dirname, "views"));
 
-app.use((req, res) => {
-  res.status(404).send("Sorry, that page doesn't exist.");
-});
+app.use(notFound);
+app.use(errorHandler);
 
 app.listen(port, () => {
   console.log(`listening on ${port}`);

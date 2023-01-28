@@ -11,5 +11,6 @@ user.route("/signup").get(users.renderSignup).post(users.signup);
 user.post("/logout", users.logout);
 
 user.checkStatus = users.checkStatus;
+user.checkalert = users.checkalert;
 
 module.exports = user;

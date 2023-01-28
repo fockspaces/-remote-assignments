@@ -1,9 +1,11 @@
+const bcrypt = require("bcrypt");
 const {
   getAllUsers,
   registerUser,
   checkUser,
   getOneUser,
 } = require("../models/User");
+const { catchAsync } = require("../utils/errorHandler");
 
 // display
 const renderUsers = (req, res) => {
@@ -18,30 +20,23 @@ const renderSignup = (req, res) => {
   res.render("users/signup");
 };
 
-const getUsers = async () => {
+// READ
+const getUsers = catchAsync(async () => {
   const users = await getAllUsers();
   return users;
-};
+});
 
 const getUser = async (id) => {
   const user = await getOneUser(id);
   return user[0];
 };
 
-const auth = async (req, res, next) => {
-  const { email, password } = req.body;
-  const users = await getAllUsers();
-  if (
-    !users.find((user) => user.password === password && user.email === email)
-  ) {
-    req.flash("error", "Invalid username or password.");
-    return res.status(401).redirect("/user/login");
-  }
-  next();
-};
-
+// POST
 const login = async (req, res) => {
-  req.session.isLoggedIn = true;
+  const { email } = req.body;
+  const user = await checkUser(email);
+  req.session.currentUser = user;
+
   req.flash("success", "You have successfully logged in.");
   return res.status(200).redirect("/article");
 };
@@ -51,24 +46,47 @@ const logout = (req, res) => {
   res.redirect("/article");
 };
 
-const signup = async (req, res) => {
-  try {
-    const { email, password } = req.body;
-    const user = await checkUser(email);
-    if (user.length) return res.status(409).send("User already exists");
-    await registerUser({ email, password });
-    return res.redirect("/user");
-  } catch (e) {
-    console.log("error:", e.message);
+const signup = catchAsync(async (req, res) => {
+  const { email, password } = req.body;
+  const user = await checkUser(email);
+  if (user.length) {
+    req.flash("error", "User already exists");
+    return res.status(409).redirect("/user/signup");
   }
+  await registerUser({ email, password });
+  return res.redirect("/user");
+});
+
+// middlewire
+const auth = async (req, res, next) => {
+  const { email, password } = req.body;
+  const users = await getAllUsers();
+  const user = users.find((user) => user.email === email);
+  if (!user) {
+    req.flash("error", "user nont found");
+    return res.status(404).redirect("/user/login");
+  }
+
+  // const isMatch = await bcrypt.compare(password, user.password);
+  const isMatch = password === user.password;
+  if (!isMatch) {
+    req.flash("error", "Invalid username or password.");
+    return res.status(401).redirect("/user/login");
+  }
+  next();
 };
 
 const checkStatus = (req, res, next) => {
-  if (req.session.isLoggedIn) {
-    res.locals.isLoggedIn = true;
-  } else {
-    res.locals.isLoggedIn = false;
+  if (req.session.currentUser) {
+    const { id, username } = req.session.currentUser[0];
+    res.locals.currentUser = { id, username };
   }
+  next();
+};
+
+const checkalert = (req, res, next) => {
+  res.locals.success = req.flash("success");
+  res.locals.error = req.flash("error");
   next();
 };
 
@@ -83,4 +101,5 @@ module.exports = {
   renderSignup,
   checkStatus,
   logout,
+  checkalert,
 };

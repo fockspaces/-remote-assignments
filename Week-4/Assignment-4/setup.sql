@@ -4,12 +4,12 @@ CREATE TABLE article(
    id INT AUTO_INCREMENT,
    title VARCHAR(255),
    content TEXT,
-   arthorID VARCHAR(20),
+   authorID VARCHAR(20),
    PRIMARY KEY(id)
 );
 
 -- Insert Row
-INSERT INTO article (title, content, arthorID)
+INSERT INTO article (title, content, authorID)
 VALUES 
 ("Article 1", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, urna in viverra malesuada, massa ante varius magna.", "1"),
 ("Article 2", "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.", "2"),
