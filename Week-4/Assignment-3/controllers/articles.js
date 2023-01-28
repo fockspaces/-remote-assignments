@@ -13,61 +13,49 @@ const getArticles = catchAsync(async (req, res) => {
   res.render("articles/index", { articles });
 });
 
-const getArticle = async (id) => {
+const getArticle = catchAsync(async (id) => {
   const article = await getOneArticle(id);
   return article[0];
-};
+});
 
-const renderArticle = async (req, res) => {
+const renderArticle = catchAsync(async (req, res) => {
   const { id } = req.params;
   const article = await getArticle(id);
   res.render("articles/article", { article });
-};
+});
 
-const renderEdit = async (req, res) => {
+const renderEdit = catchAsync(async (req, res) => {
   const { id } = req.params;
   const article = await getArticle(id);
   res.render("articles/edit", { article });
-};
+});
 
 // New
 const renderArticles = async (req, res) => {
   res.render("articles/new");
 };
 
-const addNewArticle = async (req, res) => {
-  try {
-    const { article } = req.body;
-    await addArticle(article);
-    res.redirect("/article");
-  } catch (e) {
-    console.log("error:", e.message);
-  }
-};
+const addNewArticle = catchAsync(async (req, res) => {
+  const { article } = req.body;
+  await addArticle(article);
+  res.redirect("/article");
+});
 
 // Update
-const updatePost = async (req, res) => {
-  try {
-    const { article } = req.body;
-    await UpdatePost(article);
-    res.redirect(`/article/${article.id}`);
-  } catch (e) {
-    console.log("error:", e.message);
-  }
-};
+const updatePost = catchAsync(async (req, res) => {
+  const { article } = req.body;
+  await UpdatePost(article);
+  res.redirect(`/article/${article.id}`);
+});
 
 // Delete
-const deletePost = async (req, res) => {
-  try {
-    const { id } = req.params;
-    await DeletePost(id);
-    res.redirect(`/article`);
-  } catch (e) {
-    console.log("error:", e.message);
-  }
-};
+const deletePost = catchAsync(async (req, res) => {
+  const { id } = req.params;
+  await DeletePost(id);
+  res.redirect(`/article`);
+});
 
-const isAuthor = async (req, res, next) => {
+const isAuthor = catchAsync(async (req, res, next) => {
   const { id } = req.params;
   if (!id || isNaN(id)) {
     req.flash("error", "post id is not valid");
@@ -84,7 +72,7 @@ const isAuthor = async (req, res, next) => {
   }
 
   next();
-};
+});
 
 module.exports = {
   getArticles,

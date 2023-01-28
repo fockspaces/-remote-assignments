@@ -26,20 +26,20 @@ const getUsers = catchAsync(async () => {
   return users;
 });
 
-const getUser = async (id) => {
+const getUser = catchAsync(async (id) => {
   const user = await getOneUser(id);
   return user[0];
-};
+});
 
 // POST
-const login = async (req, res) => {
+const login = catchAsync(async (req, res) => {
   const { email } = req.body;
   const user = await checkUser(email);
   req.session.currentUser = user;
 
   req.flash("success", "You have successfully logged in.");
   return res.status(200).redirect("/article");
-};
+});
 
 const logout = (req, res) => {
   req.session.destroy();
@@ -58,7 +58,7 @@ const signup = catchAsync(async (req, res) => {
 });
 
 // middlewire
-const auth = async (req, res, next) => {
+const auth = catchAsync(async (req, res, next) => {
   const { email, password } = req.body;
   const users = await getAllUsers();
   const user = users.find((user) => user.email === email);
@@ -74,7 +74,7 @@ const auth = async (req, res, next) => {
     return res.status(401).redirect("/user/login");
   }
   next();
-};
+});
 
 const checkStatus = (req, res, next) => {
   if (req.session.currentUser) {
