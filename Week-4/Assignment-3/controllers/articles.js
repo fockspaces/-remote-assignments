@@ -13,21 +13,16 @@ const getArticles = catchAsync(async (req, res) => {
   res.render("articles/index", { articles });
 });
 
-const getArticle = catchAsync(async (id) => {
-  const article = await getOneArticle(id);
-  return article[0];
-});
-
 const renderArticle = catchAsync(async (req, res) => {
   const { id } = req.params;
-  const article = await getArticle(id);
-  res.render("articles/article", { article });
+  const article = await getOneArticle(id);
+  res.render("articles/article", { article: article[0] });
 });
 
 const renderEdit = catchAsync(async (req, res) => {
   const { id } = req.params;
-  const article = await getArticle(id);
-  res.render("articles/edit", { article });
+  const article = await getOneArticle(id);
+  res.render("articles/edit", { article: article[0] });
 });
 
 // New
@@ -76,7 +71,6 @@ const isAuthor = catchAsync(async (req, res, next) => {
 
 module.exports = {
   getArticles,
-  getArticle,
   addNewArticle,
   renderArticles,
   renderArticle,

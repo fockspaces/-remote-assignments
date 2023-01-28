@@ -4,13 +4,13 @@ extends ../layouts/boilerplates.pug
 block content
     h1 List of Articles 
     h2
-        if(isLoggedIn)
+        if(currentUser)
             a(href='article/new' class="btn btn-primary") New
 
     each article in articles
         .card.mt-2
             .card-body 
-                h5.card-title
+                h4.card-title
                     a.link-dark(href=`article/${article.id}`)= article.title 
-                h6.card-subtitle= article.authorName 
+                h6.card-subtitle= `By ${article.authorName}` 
                 p.card-text= article.content.slice(0, 50)+'...'

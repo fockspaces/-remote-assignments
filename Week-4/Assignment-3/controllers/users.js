@@ -33,12 +33,12 @@ const getUser = catchAsync(async (id) => {
 
 // POST
 const login = catchAsync(async (req, res) => {
-  const { email } = req.body;
+  const { email, id } = req.body;
   const user = await checkUser(email);
   req.session.currentUser = user;
 
-  req.flash("success", "You have successfully logged in.");
-  return res.status(200).redirect("/article");
+  req.flash("success", "Welcome! Let's keep writing down the new idea!");
+  return res.status(200).redirect(`/article`);
 });
 
 const logout = (req, res) => {
@@ -73,6 +73,7 @@ const auth = catchAsync(async (req, res, next) => {
     req.flash("error", "Invalid username or password.");
     return res.status(401).redirect("/user/login");
   }
+  req.body.id = user.id;
   next();
 });
 

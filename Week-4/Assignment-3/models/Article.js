@@ -12,7 +12,9 @@ db.connect();
 
 const getAllArticles = () => {
   return new Promise((resolve, reject) => {
-    const sql = `SELECT * FROM article ORDER BY id DESC;`;
+    const sql = `SELECT article.*, user.username AS authorName FROM article 
+    JOIN user ON article.authorID = user.id
+    ORDER BY article.id DESC;`;
     db.query(sql, (err, result) => {
       if (err) reject(err);
       resolve(result);
@@ -22,7 +24,8 @@ const getAllArticles = () => {
 
 const getOneArticle = (id) => {
   return new Promise((resolve, reject) => {
-    const sql = `SELECT * FROM article WHERE id = ${id};`;
+    const sql = `SELECT article.*, user.username AS authorName FROM article 
+    JOIN user ON article.authorID = user.id WHERE article.id = ${id};`;
     db.query(sql, (err, result) => {
       if (err) reject(err);
       resolve(result);
