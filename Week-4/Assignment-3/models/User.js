@@ -45,7 +45,7 @@ const checkUser = (email) => {
     const sql = `SELECT * FROM user WHERE email = '${email}';`;
     db.query(sql, (err, result) => {
       if (err) reject(err);
-      resovle(result);
+      resovle(result[0]);
     });
   });
 };

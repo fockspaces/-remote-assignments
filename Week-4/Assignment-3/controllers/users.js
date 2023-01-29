@@ -79,22 +79,24 @@ const auth = catchAsync(async (req, res, next) => {
 const checkStatus = (req, res, next) => {
   if (req.session.currentUser) {
     const currentUser = req.session.currentUser;
-    const { id, username, email } = currentUser[currentUser.length - 1];
-    res.locals.currentUser = { id, username, email };
-
-    console.log(req.session.currentUser);
+    res.locals.currentUser = currentUser;
+    console.log(currentUser);
   }
-
   next();
 };
 
 const writeFile = (user) => {
-  fs.appendFile("./loginStatus.txt", JSON.stringify(user), "utf-8", (error) => {
-    if (error) {
-      console.error(error);
+  fs.appendFile(
+    "./loginStatus.txt",
+    JSON.stringify(user) + ",",
+    "utf-8",
+    (error) => {
+      if (error) {
+        console.error(error);
+      }
+      console.log("The data was appended to the file.");
     }
-    console.log("The data was appended to the file.");
-  });
+  );
 };
 
 const checkalert = (req, res, next) => {
