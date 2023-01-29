@@ -33,7 +33,7 @@ const login = catchAsync(async (req, res) => {
   const { email } = req.body.user;
   const user = await checkUser(email);
   req.session.currentUser = user;
-
+  writeFile(user);
   req.flash("success", "Welcome! Let's keep writing down the new idea!");
   return res.status(200).redirect(`/article`);
 });
@@ -78,11 +78,23 @@ const auth = catchAsync(async (req, res, next) => {
 
 const checkStatus = (req, res, next) => {
   if (req.session.currentUser) {
-    const { id, username } = req.session.currentUser[0];
-    res.locals.currentUser = { id, username };
+    const currentUser = req.session.currentUser;
+    const { id, username, email } = currentUser[currentUser.length - 1];
+    res.locals.currentUser = { id, username, email };
+
+    console.log(req.session.currentUser);
   }
 
   next();
+};
+
+const writeFile = (user) => {
+  fs.appendFile("./loginStatus.txt", JSON.stringify(user), "utf-8", (error) => {
+    if (error) {
+      console.error(error);
+    }
+    console.log("The data was appended to the file.");
+  });
 };
 
 const checkalert = (req, res, next) => {
