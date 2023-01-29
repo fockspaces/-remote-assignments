@@ -28,7 +28,7 @@ const getUsers = catchAsync(async () => {
 
 const getUser = catchAsync(async (id) => {
   const user = await getOneUser(id);
-  return user[0];
+  return user;
 });
 
 // POST
