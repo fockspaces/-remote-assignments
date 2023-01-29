@@ -5,7 +5,6 @@ const {
   getAllUsers,
   registerUser,
   checkUser,
-  getOneUser,
 } = require("../models/User");
 const { catchAsync } = require("../utils/errorHandler");
 
@@ -33,6 +32,7 @@ const login = catchAsync(async (req, res) => {
   const { email } = req.body.user;
   const user = await checkUser(email);
   req.session.currentUser = user;
+
   writeFile(user);
   req.flash("success", "Welcome! Let's keep writing down the new idea!");
   return res.status(200).redirect(`/article`);
@@ -80,7 +80,6 @@ const checkStatus = (req, res, next) => {
   if (req.session.currentUser) {
     const currentUser = req.session.currentUser;
     res.locals.currentUser = currentUser;
-    console.log(currentUser);
   }
   next();
 };
