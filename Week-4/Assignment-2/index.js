@@ -4,7 +4,7 @@ async function ajax(src, callback) {
   callback(data);
 }
 
-function render(datasets) {2
+function render(datasets) {
   for (const data of datasets) {
     const card = createCard(data);
     document.body.appendChild(card);

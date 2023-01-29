@@ -17,8 +17,12 @@ function delayedResultPromise(n1, n2, delayTime) {
 
 // C. To implement it using async/await this time.
 async function main() {
-  const res = await delayedResultPromise(4, 5, 3000);
-  console.log(res);
+  try {
+    const res = await delayedResultPromise(4, 5, 3000);
+    console.log(res);
+  } catch (e) {
+    console.log(e.message);
+  }
 }
 
 // #1

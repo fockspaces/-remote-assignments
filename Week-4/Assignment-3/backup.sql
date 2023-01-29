@@ -24,8 +24,9 @@ DROP TABLE IF EXISTS `user`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `user` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `email` varchar(50) DEFAULT NULL,
-  `password` varchar(20) DEFAULT NULL,
+  `email` varchar(80) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  `username` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -36,7 +37,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'fred@gmail.com','123456'),(2,'sara@gmail.com','123456'),(3,'fock@gmail.com','123456');
+INSERT INTO `user` VALUES (1,'fred@gmail.com','$2b$10$zQseJ0r8wm2dSPFwRqH0lulDi21y6wbZ.ifEO1heyoP6cGh1QDbEG','fred'),(2,'sara@gmail.com','$2b$10$zQseJ0r8wm2dSPFwRqH0lulDi21y6wbZ.ifEO1heyoP6cGh1QDbEG','sara'),(3,'fock@gmail.com','$2b$10$zQseJ0r8wm2dSPFwRqH0lulDi21y6wbZ.ifEO1heyoP6cGh1QDbEG','fock');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -49,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-01-26 16:14:56
+-- Dump completed on 2023-01-29 20:09:20
