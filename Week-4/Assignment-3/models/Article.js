@@ -33,10 +33,10 @@ const getOneArticle = (id) => {
   });
 };
 
-const addArticle = (article) => {
+const addArticle = ({ title, content, authorID }) => {
   return new Promise((resolve, reject) => {
-    const sql = `INSERT INTO article (title, content) values (?, ?);`;
-    db.query(sql, [article.title, article.content], (err, result) => {
+    const sql = `INSERT INTO article (title, content, authorID) values (?, ?, ?);`;
+    db.query(sql, [title, content, authorID], (err, result) => {
       if (err) reject(err);
       resolve(result);
     });

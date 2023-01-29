@@ -32,7 +32,8 @@ const renderArticles = async (req, res) => {
 
 const addNewArticle = catchAsync(async (req, res) => {
   const { article } = req.body;
-  await addArticle(article);
+  const authorID = req.session.currentUser[0].id;
+  await addArticle({ ...article, authorID });
   res.redirect("/article");
 });
 
