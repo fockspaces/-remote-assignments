@@ -48,6 +48,8 @@ const signup = catchAsync(async (req, res, next) => {
     req.flash("error", "User already exists");
     return res.status(409).redirect("/user/signup");
   }
+  const salt = await bcrypt.genSalt(10);
+  user.password = await bcrypt.hash(user.password, salt);
   await registerUser(user);
   next();
 });
@@ -63,7 +65,7 @@ const auth = catchAsync(async (req, res, next) => {
   }
 
   // const isMatch = await bcrypt.compare(password, user.password);
-  const isMatch = password === user.password;
+  const isMatch = await bcrypt.compare(password, user.password);
   if (!isMatch) {
     req.flash("error", "Invalid username or password.");
     return res.status(401).redirect("/user/login");

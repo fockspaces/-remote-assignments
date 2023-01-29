@@ -4,7 +4,7 @@ block content
       .card
             .card-header
                   h3.card-title= article.title
-                  h5.card-subtitle= `By ${article.authorName}`
+                  h5.card-subtitle= `By ${article.authorName || 'Anonymous'}`
             .card-body
                   p.card-text(style="white-space: pre-line")= article.content
 
