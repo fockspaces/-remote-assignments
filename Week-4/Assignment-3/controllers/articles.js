@@ -16,13 +16,13 @@ const getArticles = catchAsync(async (req, res) => {
 const renderArticle = catchAsync(async (req, res) => {
   const { id } = req.params;
   const article = await getOneArticle(id);
-  res.render("articles/article", { article: article[0] });
+  res.render("articles/article", { article });
 });
 
 const renderEdit = catchAsync(async (req, res) => {
   const { id } = req.params;
   const article = await getOneArticle(id);
-  res.render("articles/edit", { article: article[0] });
+  res.render("articles/edit", { article });
 });
 
 // New
@@ -60,7 +60,7 @@ const isAuthor = catchAsync(async (req, res, next) => {
   const article = await getOneArticle(id);
   if (
     !req.session.currentUser ||
-    req.session.currentUser[0].id != article[0].authorID
+    req.session.currentUser[0].id != article.authorID
   ) {
     req.flash("error", "you don't have permission");
     return res.status(400).redirect(`/article/${id}`);

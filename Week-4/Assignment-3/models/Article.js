@@ -25,10 +25,10 @@ const getAllArticles = () => {
 const getOneArticle = (id) => {
   return new Promise((resolve, reject) => {
     const sql = `SELECT article.*, user.username AS authorName FROM article 
-    JOIN user ON article.authorID = user.id WHERE article.id = ${id};`;
+    JOIN user ON article.authorID = user.id WHERE article.id = ${id} LIMIT 1;`;
     db.query(sql, (err, result) => {
       if (err) reject(err);
-      resolve(result);
+      resolve(result[0]);
     });
   });
 };

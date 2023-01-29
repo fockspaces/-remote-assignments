@@ -26,11 +26,6 @@ const getUsers = catchAsync(async () => {
   return users;
 });
 
-const getUser = catchAsync(async (id) => {
-  const user = await getOneUser(id);
-  return user;
-});
-
 // POST
 const login = catchAsync(async (req, res) => {
   const { email } = req.body.user;
@@ -43,7 +38,7 @@ const login = catchAsync(async (req, res) => {
 
 const logout = (req, res) => {
   req.session.destroy();
-  res.redirect("/article");
+  res.redirect("/");
 };
 
 const signup = catchAsync(async (req, res, next) => {
@@ -96,7 +91,6 @@ module.exports = {
   login,
   signup,
   getUsers,
-  getUser,
   renderUsers,
   renderLogin,
   renderSignup,
