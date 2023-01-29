@@ -1,11 +1,7 @@
 const bcrypt = require("bcrypt");
 const fs = require("fs");
 
-const {
-  getAllUsers,
-  registerUser,
-  checkUser,
-} = require("../models/User");
+const { getAllUsers, registerUser, checkUser } = require("../models/User");
 const { catchAsync } = require("../utils/errorHandler");
 
 // display
@@ -33,12 +29,13 @@ const login = catchAsync(async (req, res) => {
   const user = await checkUser(email);
   req.session.currentUser = user;
 
-  writeFile(user);
+  writeFile({ ...user, login: true });
   req.flash("success", "Welcome! Let's keep writing down the new idea!");
   return res.status(200).redirect(`/article`);
 });
 
 const logout = (req, res) => {
+  writeFile({ ...req.session.currentUser, login: false });
   req.session.destroy();
   res.redirect("/");
 };
