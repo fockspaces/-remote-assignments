@@ -77,7 +77,6 @@ callback function不能直接回傳data，必須轉為promise接收資料
 - [x]  welcome message with req.flash
 - [ ]  password hash (with bcrypt)
 - [x]  check if account has been registered
-- [ ]  list all of the accoounts and delete button
 - [x]  req.session restore
 - [x]  textarea偵測換行
     
@@ -86,13 +85,16 @@ callback function不能直接回傳data，必須轉為promise接收資料
     解決方法 : 在display tag加上`style="white-space: pre-line"`
     
 - [x]  auth post id
-- [ ]  add right-menu(float) to display all accounts (name and login status)
 - [x]  hide edit and delete btn when not auth
-- [ ]  make posts to N*3 grid display
+- [x]  make posts to N*3 grid display
 - [x]  logout option
 - [x]  catch async
 - [x]  reformat form
 - [x]  fadeout alert
+- [x]  one logout, others remains login
+    
+    不同的browser會有不同connect_sid，當執行session.destroy()時，並不會刪除其他client的session
+    
 
 ## Assignment 4: Design Table Schema (Advanced Optional)
 
@@ -149,6 +151,7 @@ callback function不能直接回傳data，必須轉為promise接收資料
     session default不會store在real database，之後可以改存到redis/mongo作為backup
     
 - [x]  flash to show alert message
+- [x]  session寫入local file觀察
 
 ### 🔒 Password Authentication & Authorization
 
@@ -158,7 +161,7 @@ callback function不能直接回傳data，必須轉為promise接收資料
     
     set permission to aviod someone use postman method to delete post
     
-- [ ]  Hash Password (bcrypt)
+- [x]  Hash Password (bcrypt)
     
     透過genSalt產生一組序號，以此作為signature來對應特定的output
     
@@ -170,8 +173,8 @@ callback function不能直接回傳data，必須轉為promise接收資料
 
 ### 💽 SQL database
 
-- [ ]  pseudo-datasets (with script)
-- [ ]  fetch the first one it hit (single-read)
+- [x]  pseudo-datasets (with script)
+- [x]  fetch the first one it hit (single-read)
 - [x]  design table
     
     user : email, password, username
@@ -179,6 +182,12 @@ callback function不能直接回傳data，必須轉為promise接收資料
     article : title, content, author_id
     
 
-### 🚢 Deploy
+### 💳 Redis cache
 
-- [ ]  deploy on Heroku
+- [x]  使用redis server來儲存session資訊，避免server shutdown lossing data
+    
+    暫時先不打算使用，因為沒必要只為了login status特別開一個server
+    
+    而且也遇到一些process handle的問題，為了維護方便性，決定先做取捨
+    
+    另外存local file的方法，我覺得存在database後，每次run server都先從中fetch似乎也能達到
