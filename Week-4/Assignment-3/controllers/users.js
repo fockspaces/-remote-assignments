@@ -1,4 +1,6 @@
 const bcrypt = require("bcrypt");
+const fs = require("fs");
+
 const {
   getAllUsers,
   registerUser,
@@ -79,6 +81,7 @@ const checkStatus = (req, res, next) => {
     const { id, username } = req.session.currentUser[0];
     res.locals.currentUser = { id, username };
   }
+
   next();
 };
 
