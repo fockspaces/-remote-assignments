@@ -1,12 +1,5 @@
+
 [
-  {
-    "id": 3,
-    "email": "fock@gmail.com",
-    "password": "$2b$10$zQseJ0r8wm2dSPFwRqH0lulDi21y6wbZ.ifEO1heyoP6cGh1QDbEG",
-    "username": "fock",
-    "login": true
-  }
-][
   {
     "id": 3,
     "email": "fock@gmail.com",
@@ -35,11 +28,47 @@
     "email": "fock@gmail.com",
     "password": "$2b$10$zQseJ0r8wm2dSPFwRqH0lulDi21y6wbZ.ifEO1heyoP6cGh1QDbEG",
     "username": "fock",
+    "login": true
+  }
+]
+[
+  {
+    "id": 3,
+    "email": "fock@gmail.com",
+    "password": "$2b$10$zQseJ0r8wm2dSPFwRqH0lulDi21y6wbZ.ifEO1heyoP6cGh1QDbEG",
+    "username": "fock",
     "login": false
   }
 ]
 [
   {
+    "id": 7,
+    "email": "1234",
+    "password": "$2b$10$F7JRPKIR9mIkuLope.DuYuiuvJo9muyuj3ZszBRlrRzyqLMLff/nW",
+    "username": "1234@gmail.com",
+    "login": true
+  }
+]
+[
+  {
+    "id": 7,
+    "email": "1234",
+    "password": "$2b$10$F7JRPKIR9mIkuLope.DuYuiuvJo9muyuj3ZszBRlrRzyqLMLff/nW",
+    "username": "1234@gmail.com",
+    "login": false
+  }
+]
+[
+  {
+    "id": 4,
+    "email": "123",
+    "password": "$2b$10$i9OjhOWtkb9x.85Q18syNekPmtTNzB0MnISGr2ENxu4c8/oe8kOdq",
+    "username": "123@gmail.com",
+    "login": true
+  }
+]
+[
+  {
     "id": 3,
     "email": "fock@gmail.com",
     "password": "$2b$10$zQseJ0r8wm2dSPFwRqH0lulDi21y6wbZ.ifEO1heyoP6cGh1QDbEG",
@@ -53,6 +82,6 @@
     "email": "fock@gmail.com",
     "password": "$2b$10$zQseJ0r8wm2dSPFwRqH0lulDi21y6wbZ.ifEO1heyoP6cGh1QDbEG",
     "username": "fock",
-    "login": true
+    "login": false
   }
 ]

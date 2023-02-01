@@ -36,14 +36,18 @@ const login = catchAsync(async (req, res) => {
 
 const logout = (req, res) => {
   writeFile({ ...req.session.currentUser, login: false });
-  req.session.destroy();
-  res.redirect("/");
+  req.session.destroy((err) => {
+    if (err) {
+      console.error(err);
+    }
+    res.redirect("/");
+  });
 };
 
 const signup = catchAsync(async (req, res, next) => {
   const { user } = req.body;
   const userExist = await checkUser(user.email);
-  if (userExist.length) {
+  if (userExist) {
     req.flash("error", "User already exists");
     return res.status(409).redirect("/user/signup");
   }

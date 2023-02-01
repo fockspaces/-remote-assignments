@@ -40,6 +40,10 @@ Status: In progress
 
 `mysqldump -u root -p assignment > backup.sql`
 
+backup sql file
+
+`mysql -u root -p assignment < backup.sql`
+
 ### **Data Schema :**
 
 📄 [email data type](https://www.notion.so/Week-4-Assignment-35a6648e88594d30b9bbaa87b408cc91) 
@@ -75,7 +79,7 @@ callback function不能直接回傳data，必須轉為promise接收資料
     
 - [x]  Validated From (give alert if not match)
 - [x]  welcome message with req.flash
-- [ ]  password hash (with bcrypt)
+- [x]  password hash (with bcrypt)
 - [x]  check if account has been registered
 - [x]  req.session restore
 - [x]  textarea偵測換行
@@ -101,6 +105,8 @@ callback function不能直接回傳data，必須轉為promise接收資料
 ### **思路 :**
 
 在每一篇文章記下author_id後即可用LEFT JOIN refer back author data
+
+這裡用author_id作為foreign key的原因是，id為unique value，如果用name match可能會出現重複author name 
 
 ## 🚧開發流程
 
@@ -185,9 +191,3 @@ callback function不能直接回傳data，必須轉為promise接收資料
 ### 💳 Redis cache
 
 - [x]  使用redis server來儲存session資訊，避免server shutdown lossing data
-    
-    暫時先不打算使用，因為沒必要只為了login status特別開一個server
-    
-    而且也遇到一些process handle的問題，為了維護方便性，決定先做取捨
-    
-    另外存local file的方法，我覺得存在database後，每次run server都先從中fetch似乎也能達到
