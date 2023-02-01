@@ -1,7 +1,7 @@
 async function ajax(src, callback) {
   const res = await fetch(src);
   const data = await res.json();
-  callback(data);
+  return callback(data);
 }
 
 function render(datasets) {
