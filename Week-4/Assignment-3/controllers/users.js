@@ -29,13 +29,13 @@ const login = catchAsync(async (req, res) => {
   const user = await checkUser(email);
   req.session.currentUser = user;
 
-  // writeFile({ ...user, login: true });
+  writeFile({ ...user, login: true });
   req.flash("success", "Welcome! Let's keep writing down the new idea!");
   return res.status(200).redirect(`/article`);
 });
 
 const logout = (req, res) => {
-  // writeFile({ ...req.session.currentUser, login: false });
+  writeFile({ ...req.session.currentUser, login: false });
   req.session.destroy();
   res.redirect("/");
 };
@@ -81,35 +81,35 @@ const checkStatus = (req, res, next) => {
   next();
 };
 
-// const writeFile = (user) => {
-//   fs.access("./loginStatus.txt", fs.constants.F_OK, (error) => {
-//     if (error) {
-//       fs.writeFile(
-//         "./loginStatus.txt",
-//         JSON.stringify([user], null, 2),
-//         "utf-8",
-//         (error) => {
-//           if (error) {
-//             console.error(error);
-//           }
-//           console.log("The data was written to the file.");
-//         }
-//       );
-//     } else {
-//       fs.appendFile(
-//         "./loginStatus.txt",
-//         "\n" + JSON.stringify([user], null, 2),
-//         "utf-8",
-//         (error) => {
-//           if (error) {
-//             console.error(error);
-//           }
-//           console.log("The data was appended to the file.");
-//         }
-//       );
-//     }
-//   });
-// };
+const writeFile = (user) => {
+  fs.access("./loginStatus.txt", fs.constants.F_OK, (error) => {
+    if (error) {
+      fs.writeFile(
+        "./loginStatus.txt",
+        JSON.stringify([user], null, 2),
+        "utf-8",
+        (error) => {
+          if (error) {
+            console.error(error);
+          }
+          console.log("The data was written to the file.");
+        }
+      );
+    } else {
+      fs.appendFile(
+        "./loginStatus.txt",
+        "\n" + JSON.stringify([user], null, 2),
+        "utf-8",
+        (error) => {
+          if (error) {
+            console.error(error);
+          }
+          console.log("The data was appended to the file.");
+        }
+      );
+    }
+  });
+};
 
 const checkalert = (req, res, next) => {
   res.locals.success = req.flash("success");
