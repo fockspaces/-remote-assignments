@@ -4,34 +4,15 @@
     "email": "fock@gmail.com",
     "password": "$2b$10$zQseJ0r8wm2dSPFwRqH0lulDi21y6wbZ.ifEO1heyoP6cGh1QDbEG",
     "username": "fock",
-    "login": false
-  },
+    "login": true
+  }
+]
+[
   {
     "id": 3,
     "email": "fock@gmail.com",
     "password": "$2b$10$zQseJ0r8wm2dSPFwRqH0lulDi21y6wbZ.ifEO1heyoP6cGh1QDbEG",
     "username": "fock",
     "login": true
-  },
-  {
-    "id": 3,
-    "email": "fock@gmail.com",
-    "password": "$2b$10$zQseJ0r8wm2dSPFwRqH0lulDi21y6wbZ.ifEO1heyoP6cGh1QDbEG",
-    "username": "fock",
-    "login": false
-  },
-  {
-    "id": 1,
-    "email": "fred@gmail.com",
-    "password": "$2b$10$zQseJ0r8wm2dSPFwRqH0lulDi21y6wbZ.ifEO1heyoP6cGh1QDbEG",
-    "username": "fred",
-    "login": true
-  },
-  {
-    "id": 1,
-    "email": "fred@gmail.com",
-    "password": "$2b$10$zQseJ0r8wm2dSPFwRqH0lulDi21y6wbZ.ifEO1heyoP6cGh1QDbEG",
-    "username": "fred",
-    "login": false
   }
 ]
