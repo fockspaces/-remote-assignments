@@ -2,7 +2,6 @@ const express = require("express");
 const methodOverride = require("method-override");
 const flash = require("connect-flash");
 const session = require("express-session");
-const FileStore = require("session-file-store")(session);
 
 const user = require("./routes/user");
 const article = require("./routes/article");
@@ -19,7 +18,6 @@ app.use(methodOverride("_method"));
 // configure express-session
 app.use(
   session({
-    store: new FileStore(),
     secret: "secretKey",
     resave: false,
     saveUninitialized: true,
@@ -50,3 +48,5 @@ app.use(errorHandler);
 app.listen(port, () => {
   console.log(`listening on ${port}`);
 });
+
+
