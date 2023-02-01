@@ -6,45 +6,26 @@ async function ajax(src, callback) {
 
 function render(datasets) {
   for (const data of datasets) {
-    const card = createCard(data);
+    const card = document.createElement("div");
+    card.innerHTML = renderCard(data);
     document.body.appendChild(card);
   }
 }
 
-ajax(
-  "https://appworks-school.github.io/Remote-Assignment-Data/products",
-  function (response) {
-    render(response);
-  }
-); // you should get product information in JSON format and render data in the page
-
-const createCard = (data) => {
-  const card = document.createElement("div");
-  card.classList.add("card");
-  card.style.width = "18rem";
-  card.style.marginTop = "15px";
-
-  const cardBody = document.createElement("div");
-  cardBody.classList.add("card-body");
-
-  const title = document.createElement("h5");
-  title.classList.add("card-title");
-  title.innerText = data.name;
-
-  const price = document.createElement("h6");
-  price.classList.add("card-subtitle");
-  price.classList.add("mb-2");
-  price.classList.add("text-muted");
-  price.innerText = `$${data.price}`;
-
-  const text = document.createElement("p");
-  text.classList.add("card-text");
-  text.innerText = data.description;
-
-  cardBody.appendChild(title);
-  cardBody.appendChild(price);
-  cardBody.appendChild(text);
-
-  card.appendChild(cardBody);
-  return card;
+const renderCard = ({ name, price, description }) => {
+  return `<div class="card" style="width: 18rem; margin-top: 15px;">
+  <div class="card-body">
+    <h5 class="card-title">${name}</h5>
+    <h6 class="card-subtitle mb-2 text-muted">$${price}</h6>
+    <p class="card-text">${description}</p>
+  </div>
+</div>`;
 };
+
+document.querySelector("#display-btn").addEventListener("click", (e) => {
+  ajax(
+    "https://appworks-school.github.io/Remote-Assignment-Data/products",
+    render
+  ); // you should get product information in JSON format and render data in the page
+  e.target.remove();
+});
