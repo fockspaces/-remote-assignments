@@ -3,6 +3,8 @@ const methodOverride = require("method-override");
 const flash = require("connect-flash");
 const session = require("express-session");
 // const FileStore = require("session-file-store")(session);
+require('dotenv').config();
+
 
 const user = require("./routes/user");
 const article = require("./routes/article");
@@ -11,7 +13,7 @@ const { notFound, errorHandler } = require("./utils/errorHandler");
 const path = require("path");
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT;
 
 app.use(express.json()); // to support JSON-encoded bodies
 app.use(express.urlencoded({ extended: true })); // to support URL-encoded bodies
